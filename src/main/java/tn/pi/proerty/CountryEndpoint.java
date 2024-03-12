@@ -23,8 +23,9 @@ public class CountryEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
     @ResponsePayload
     public GetCountryResponse getCountry(@RequestPayload GetCountryRequest request) {
+        CountryEntity country = countryRepository.findByName(request.getName()).get();
         GetCountryResponse response = new GetCountryResponse();
-        response.setCountry(countryRepository.findCountry(request.getName()));
+        response.setCountry(CountryMapper.mapEntityToSoap(country));
         return response;
     }
 }
