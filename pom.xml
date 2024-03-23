@@ -69,7 +69,7 @@
                 </executions>
                 <configuration>
                     <sources>
-                        <source>src/main/resources/countries.xsd</source>
+                        <source>src/main/resources/property.xsd</source>
                     </sources>
                     <outputDirectory>src/main/java</outputDirectory>
                     <clearOutputDir>false</clearOutputDir>
