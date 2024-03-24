@@ -1,6 +1,7 @@
 package tn.pi.proerty.entities;
 
 
+import com.baeldung.springsoap.gen.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,5 +23,7 @@ public class PropertyEntity {
 
     @Column(name = "user_fk")
     private long user;
+
+    private Status status;
 
 }

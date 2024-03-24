@@ -8,9 +8,10 @@
 
 package com.baeldung.springsoap.gen;
 
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
 
@@ -25,7 +26,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="property" type="{http://www.baeldung.com/springsoap/gen}property"/&gt;
+ *         &lt;element name="property" type="{http://www.baeldung.com/springsoap/gen}property" maxOccurs="unbounded" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -38,34 +39,38 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "property"
 })
-@XmlRootElement(name = "getPropertyResponse")
-public class GetPropertyResponse {
+@XmlRootElement(name = "getAllPropertiesResponse")
+public class GetAllPropertiesResponse {
 
-    @XmlElement(required = true)
-    protected Property property;
+    protected List<Property> property;
 
     /**
      * Gets the value of the property property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Property }
-     *     
-     */
-    public Property getProperty() {
-        return property;
-    }
-
-    /**
-     * Sets the value of the property property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the Jakarta XML Binding object.
+     * This is why there is not a <CODE>set</CODE> method for the property property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Property }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getProperty().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Property }
+     * 
+     * 
      */
-    public void setProperty(Property value) {
-        this.property = value;
+    public List<Property> getProperty() {
+        if (property == null) {
+            property = new ArrayList<Property>();
+        }
+        return this.property;
     }
 
 }

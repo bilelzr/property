@@ -2,6 +2,21 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.baeldung.com/springsoap/gen"
            targetNamespace="http://www.baeldung.com/springsoap/gen" elementFormDefault="qualified">
 
+    <xs:element name="getAllPropertiesRequest">
+        <xs:complexType>
+            <!-- No elements needed for the request -->
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllPropertiesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="property" type="tns:property" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
     <xs:element name="getPropertyRequest">
         <xs:complexType>
             <xs:sequence>

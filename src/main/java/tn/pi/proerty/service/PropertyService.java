@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import tn.pi.proerty.entities.PropertyEntity;
 import tn.pi.proerty.repositories.PropertyRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PropertyService {
@@ -13,14 +15,16 @@ public class PropertyService {
 
     private final PropertyRepository propertyRepository;
 
-    public PropertyEntity getPropertyByTitle(String title){
+    public PropertyEntity getPropertyByTitle(String title) {
         return propertyRepository.findByTitle(title).get();
     }
-    public void getProperty(){
 
+    public List<PropertyEntity> getAllProperties() {
+        return propertyRepository.findAll();
     }
-    public void addProperty(PropertyEntity employee) {
-        propertyRepository.save(employee);
+
+    public PropertyEntity addProperty(PropertyEntity employee) {
+        return propertyRepository.save(employee);
     }
 
 }

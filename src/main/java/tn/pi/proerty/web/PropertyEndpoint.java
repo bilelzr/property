@@ -1,7 +1,6 @@
 package tn.pi.proerty.web;
 
 import com.baeldung.springsoap.gen.*;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -10,6 +9,8 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import tn.pi.proerty.dto.PropertyMapper;
 import tn.pi.proerty.entities.PropertyEntity;
 import tn.pi.proerty.service.PropertyService;
+
+import java.util.List;
 
 
 @Endpoint
@@ -24,6 +25,17 @@ public class PropertyEndpoint {
         this.propertyService = propertyService;
     }
 
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllPropertiesRequest")
+    @ResponsePayload
+    public GetAllPropertiesResponse getAllProperty(@RequestPayload GetAllPropertiesRequest request) {
+        GetAllPropertiesResponse response = new GetAllPropertiesResponse();
+        List<PropertyEntity> property = propertyService.getAllProperties();
+        response.getProperty().addAll(PropertyMapper.mapMultipleEntityToSoap(property));
+        return response;
+    }
+
+
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getPropertyRequest")
     @ResponsePayload
     public GetPropertyResponse getPropertyByTitle(@RequestPayload GetPropertyRequest request) {
@@ -37,12 +49,8 @@ public class PropertyEndpoint {
     @ResponsePayload
     public AddPropertyResponse addEmployee(@RequestPayload AddPropertyRequest request) {
         AddPropertyResponse response = new AddPropertyResponse();
-        PropertyEntity property = new PropertyEntity();
-        BeanUtils.copyProperties(request.getProperty(), property);
-        propertyService.addProperty(property);
-        Property property1 = new Property();
-        BeanUtils.copyProperties(property1, response.getProperty());
-        response.setProperty(property1);
+        PropertyEntity property = propertyService.addProperty(PropertyMapper.mapSoapToEntity(request.getProperty()));
+        response.setProperty(PropertyMapper.mapEntityToSoap(property));
         return response;
     }
 
