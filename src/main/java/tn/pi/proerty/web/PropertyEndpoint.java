@@ -2,6 +2,7 @@ package tn.pi.proerty.web;
 
 import com.baeldung.springsoap.gen.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -14,6 +15,7 @@ import java.util.List;
 
 
 @Endpoint
+@CrossOrigin
 public class PropertyEndpoint {
 
     private static final String NAMESPACE_URI = "http://www.baeldung.com/springsoap/gen";
@@ -39,7 +41,7 @@ public class PropertyEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getPropertyRequest")
     @ResponsePayload
     public GetPropertyResponse getPropertyByTitle(@RequestPayload GetPropertyRequest request) {
-        PropertyEntity property = propertyService.getPropertyByTitle(request.getName());
+        PropertyEntity property = propertyService.getPropertyById(request.getId());
         GetPropertyResponse response = new GetPropertyResponse();
         response.setProperty(PropertyMapper.mapEntityToSoap(property));
         return response;

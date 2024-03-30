@@ -15,8 +15,8 @@ public class PropertyService {
 
     private final PropertyRepository propertyRepository;
 
-    public PropertyEntity getPropertyByTitle(String title) {
-        return propertyRepository.findByTitle(title).get();
+    public PropertyEntity getPropertyById(Long  title) {
+        return propertyRepository.findById(title).get();
     }
 
     public List<PropertyEntity> getAllProperties() {
